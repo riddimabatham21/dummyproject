@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-
+import Sidebar from "../pages/home/components/sidebar";
 const Home = () => {
   const userState = useSelector((state) => state.userState);
 
@@ -36,6 +36,8 @@ const Home = () => {
         <span>Quick Chat</span>
       </div>
       <div className="user-info">
+        <Sidebar></Sidebar>
+
         <div className="user-avatar">{getInitials()}</div>
         <span>{getFullName()}</span>
       </div>

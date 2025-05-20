@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getUserLoggedUser } from "../apiCalls/user"; // your API call
-import { setUser } from "../rudux/userSlice";
+import { getUserLoggedUser, getAllUser } from "../apiCalls/user"; // your API call
+import { allUser, setUser } from "../rudux/userSlice";
 import toast from "react-hot-toast";
 
 const ProtectRoute = ({ children }) => {
@@ -28,11 +28,27 @@ const ProtectRoute = ({ children }) => {
     }
   };
 
+  const getAllUserfromdb = async () => {
+    let response = null;
+    try {
+      response = await getAllUser();
+
+      if (response.success) {
+        dispatch(allUser(response.data)); // update Redux
+        // toast.success(response.data);
+      } else {
+        toast.error(response.message);
+        window.location.href = "/login";
+      }
+    } catch (e) {}
+  };
+
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       navigate("/login");
     } else if (!user) {
       getLoggedUser();
+      getAllUserfromdb();
     }
   }, [user, navigate]);
 
