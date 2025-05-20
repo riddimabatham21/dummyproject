@@ -3,7 +3,7 @@ const app = express();
 const authRouter = require("./controller/authController");
 const userRouter = require("./controller/userController");
 const chatRouter = require("./controller/chatController");
-const paymentRouter = require("./controller/paymentController");
+// const paymentRouter = require("./controller/paymentController");
 const messageRouter = require("./controller/messageController");
 
 const rateLimit = require("express-rate-limit");
@@ -29,7 +29,7 @@ app.use("/api/user", userRouter); // Mounts all auth-related routes under /api/a
 
 app.use("/api/chat", chatRouter); // Mounts all auth-related routes under /api/auth
 
-app.use("/api/payment", paymentRouter);
+// app.use("/api/payment", paymentRouter);
 
 app.use("/api/message", messageRouter);
 
